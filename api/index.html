@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Sistema de carros</h1>
+    <button id="load">Load carros</button>
+    <div id="dados"></div>
+    
+    <script>
+        botao = document.getElementById("load");
+        botao.addEventListener("click", function(){
+            alert("Clicou no botão");
+            url = "http://127.0.0.1:5000/carros";
+            fetch(url)
+                .then((response) => response.json())
+                .then((data) => {
+                    div = document.getElementById("dados");
+                    tabela = "<table>";
+                        for(var i = 0; i < data.length; i++) {
+                            c = data[i]
+                            tabela = tabela + "<tr><td>" + c.placa + "<td>" + c.montadora
+                                            + "<td>" + c.modelo + "<td>" + c.ano + "<tr>";
+                        }
+                        tabela += "</table>"
+                        div.innerHTML = tabela;
+                })
+        });
+    </script>
+
+</body>
+</html>
